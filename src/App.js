@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+
 import './App.css';
+import receiptData from './receiptData';
+import Receipts from './components/Receipts';
+import Form from './components/Form';
+import React, {useState} from 'react';
+
+
 
 function App() {
+  
+      const [receipts, setReceipts] = useState(receiptData)
+      // console.log(receiptData[0].person)
+
+      const compareName = (name) => {
+
+      const result = receiptData.filter(receipt =>  name === receipt.person)
+       setReceipts(result)
+
+      }
+    
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    <div>
+       <h1>Korilla Receipts</h1>
+       <Form  compareName = {compareName}/>
+       <section className = "container">
+       <Receipts receipts={receipts}/>
+       </section>
     </div>
   );
 }
